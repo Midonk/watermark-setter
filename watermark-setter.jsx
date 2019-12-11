@@ -17,10 +17,12 @@ var progressBar = null;
 
 //Create UI to setup the script
 function createUI(){
-    win = new Window("dialog", "new window");
+    win = new Window("dialog", "Watermark setter");
+    win.orientation = "column";
 
     //Create the border spacing panel
     win.offsetPanel = win.add("panel", undefined, "Border offset");
+    win.offsetPanel.alignment = "fill";
 
     //Horizontal offset
     win.offsetPanel.hGrp = win.offsetPanel.add("group", undefined);
@@ -49,27 +51,28 @@ function createUI(){
     //Create the localisation panel for the watermark
     win.markLoc = win.add("panel", undefined, "Watermark localisation");
     win.markLoc.orientation = 'column';
+    win.markLoc.alignment = "fill";
 
     win.markLoc.radioGrp = win.markLoc.add("group", undefined);
     win.markLoc.radioGrp.orientation = 'column';
 
     win.markLoc.radioGrp.alignTopLeft = win.markLoc.radioGrp.add("radiobutton", undefined, "TL");
-    win.markLoc.radioGrp.alignTopLeft.alignement = ["top", "left"];
+    win.markLoc.radioGrp.alignTopLeft.alignement = ["left", "top"];
     win.markLoc.radioGrp.alignTopLeft.tag = "TL";
     win.markLoc.radioGrp.alignTopLeft.addEventListener("click", switchCorner);
 
     win.markLoc.radioGrp.alignTopRight = win.markLoc.radioGrp.add("radiobutton", undefined, "TR");
-    win.markLoc.radioGrp.alignTopRight.alignement = ["top", "right"];
+    win.markLoc.radioGrp.alignTopRight.alignement = ["right", "top"];
     win.markLoc.radioGrp.alignTopRight.tag = "TR";
     win.markLoc.radioGrp.alignTopRight.addEventListener("click", switchCorner);
 
     win.markLoc.radioGrp.alignBottomLeft = win.markLoc.radioGrp.add("radiobutton", undefined, "BL");
-    win.markLoc.radioGrp.alignBottomLeft.alignement = ["bottom", "left"];
+    win.markLoc.radioGrp.alignBottomLeft.alignement = ["left", "bottom"];
     win.markLoc.radioGrp.alignBottomLeft.tag = "BL";
     win.markLoc.radioGrp.alignBottomLeft.addEventListener("click", switchCorner);
 
     win.markLoc.radioGrp.alignBottomRight = win.markLoc.radioGrp.add("radiobutton", undefined, "BR");
-    win.markLoc.radioGrp.alignBottomRight.alignement = ["bottom", "right"];
+    win.markLoc.radioGrp.alignBottomRight.alignement = ["right", "bottom"];
     win.markLoc.radioGrp.alignBottomRight.tag = "BR";
     win.markLoc.radioGrp.alignBottomRight.addEventListener("click", switchCorner);
     win.markLoc.radioGrp.alignBottomRight.value = true;
@@ -78,9 +81,10 @@ function createUI(){
     win.dropList = win.add("DropDownList", undefined, setListItems());
     win.dropList.title = "Watermark  selection";
     win.dropList.selection = win.dropList.items[0];
+    win.dropList.alignment = "fill";
 
     win.confirmBtnGrp = win.add("group", undefined);
-    win.confirmBtnGrp.alignChildren = "right";
+    win.confirmBtnGrp.alignment = "fill";
 
     win.confirmBtnGrp.okBtn = win.confirmBtnGrp.add("button", undefined, "Ok");
     win.confirmBtnGrp.okBtn.onClick = WaterMarkSetter;
