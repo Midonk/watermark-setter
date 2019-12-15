@@ -12,8 +12,8 @@ var facteurH = 1;
 //vertical factor used to calculate the offset and the watermark placement
 var facteurV = 1;
 //Interface window
-var win = null;
-var progressBar = null;
+var win;
+var progressBar;
 
 //Create UI to setup the script
 function createUI(){
@@ -29,7 +29,7 @@ function createUI(){
     win.offsetPanel.hGrp.add("statictext", undefined, "H");
     win.offsetPanel.hGrp.hOffsetValue = win.offsetPanel.hGrp.add("edittext", undefined);
     win.offsetPanel.hGrp.hOffsetValue.text = 0;
-    win.offsetPanel.hGrp.hOffsetValue.addEventListener("change", setHValue);
+    win.offsetPanel.hGrp.hOffsetValue.addEventListener("change", function(evt){setHValue(evt, hValue)});
     win.offsetPanel.hGrp.add("statictext", undefined, "px");
 
     //Vertical offset
@@ -39,7 +39,7 @@ function createUI(){
     win.offsetPanel.vGrp.add("statictext", undefined, "V");
     win.offsetPanel.vGrp.vOffsetValue = win.offsetPanel.vGrp.add("edittext", undefined);
     win.offsetPanel.vGrp.vOffsetValue.text = 0;
-    win.offsetPanel.vGrp.vOffsetValue.addEventListener("change", setVValue);
+    win.offsetPanel.vGrp.vOffsetValue.addEventListener("change", function(evt){setHValue(evt, vValue)});
     win.offsetPanel.vGrp.add("statictext", undefined, "px");
 
     //Link both offsets values or not
@@ -111,29 +111,16 @@ function testLink(value) {
     }
 }
 
-//Setter for hValue
-function setHValue(evt) {
+//Setter for h/vValue
+function setHValue(evt, vhValue) {
     var value = parseInt(evt.currentTarget.text, 10);
     if (!isNaN(value)) {
-        hValue = value;
+        vhValue = value;
         evt.currentTarget.text = value.toString();
         testLink(value);
     } else {
         alert("Invalid value: please enter a valid number");
-        evt.currentTarget.text = hValue.toString();
-    }
-}
-
-//Setter for vValue
-function setVValue(evt) {
-    var value = parseInt(evt.currentTarget.text, 10);
-    if (!isNaN(value)) {
-        vValue = value;
-        evt.currentTarget.text = value.toString();
-        testLink(value);
-    } else {
-        alert("Invalid value: please enter a valid number");
-        evt.currentTarget.text = vValue.toString();
+        evt.currentTarget.text = vhValue.toString();
     }
 }
 
